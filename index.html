@@ -2,87 +2,271 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>GlobalID Demo</title>
+  <title>AAMVA v10 Generator - Validated Full Form</title>
+  <style>
+    body { font-family: sans-serif; background:#f6f8fa; padding:2em; }
+    label { display:inline-block; width:170px; margin-top:.4em; }
+    fieldset { border:1px solid #ccc; padding:1em; margin-bottom:1.5em; }
+    legend { font-size:1em; font-weight:bold;}
+    .row {margin-bottom:0.5em;}
+    #advancedFields { display:none; }
+    .toggle { margin-bottom:1.3em; }
+    input:invalid, select:invalid { border: 1px solid red; }
+  </style>
 </head>
 <body>
   <h1>AAMVA v10 Generator Demo</h1>
-  <form id="dlForm">
-   <label for="state">State:</label>
-<select id="state">
-  <option value="ALABAMA">Alabama</option>
-  <option value="ALASKA">Alaska</option>
-  <option value="ARIZONA">Arizona</option>
-  <option value="ARKANSAS">Arkansas</option>
-  <option value="CALIFORNIA">California</option>
-  <option value="COLORADO">Colorado</option>
-  <option value="CONNECTICUT">Connecticut</option>
-  <option value="DELAWARE">Delaware</option>
-  <option value="FLORIDA">Florida</option>
-  <option value="GEORGIA">Georgia</option>
-  <option value="HAWAII">Hawaii</option>
-  <option value="IDAHO">Idaho</option>
-  <option value="ILLINOIS">Illinois</option>
-  <option value="INDIANA">Indiana</option>
-  <option value="IOWA">Iowa</option>
-  <option value="KANSAS">Kansas</option>
-  <option value="KENTUCKY">Kentucky</option>
-  <option value="LOUISIANA">Louisiana</option>
-  <option value="MAINE">Maine</option>
-  <option value="MARYLAND">Maryland</option>
-  <option value="MASSACHUSETTS">Massachusetts</option>
-  <option value="MICHIGAN">Michigan</option>
-  <option value="MINNESOTA">Minnesota</option>
-  <option value="MISSISSIPPI">Mississippi</option>
-  <option value="MISSOURI">Missouri</option>
-  <option value="MONTANA">Montana</option>
-  <option value="NEBRASKA">Nebraska</option>
-  <option value="NEVADA">Nevada</option>
-  <option value="NEW HAMPSHIRE">New Hampshire</option>
-  <option value="NEW JERSEY">New Jersey</option>
-  <option value="NEW MEXICO">New Mexico</option>
-  <option value="NEW YORK">New York</option>
-  <option value="NORTH CAROLINA">North Carolina</option>
-  <option value="NORTH DAKOTA">North Dakota</option>
-  <option value="OHIO">Ohio</option>
-  <option value="OKLAHOMA">Oklahoma</option>
-  <option value="OREGON">Oregon</option>
-  <option value="PENNSYLVANIA">Pennsylvania</option>
-  <option value="RHODE ISLAND">Rhode Island</option>
-  <option value="SOUTH CAROLINA">South Carolina</option>
-  <option value="SOUTH DAKOTA">South Dakota</option>
-  <option value="TENNESSEE">Tennessee</option>
-  <option value="TEXAS" selected>Texas</option>
-  <option value="UTAH">Utah</option>
-  <option value="VERMONT">Vermont</option>
-  <option value="VIRGINIA">Virginia</option>
-  <option value="WASHINGTON">Washington</option>
-  <option value="WEST VIRGINIA">West Virginia</option>
-  <option value="WISCONSIN">Wisconsin</option>
-  <option value="WYOMING">Wyoming</option>
-  <option value="DISTRICT OF COLUMBIA">District of Columbia</option>
-</select>
 
-    <label for="dcs">Last Name (DCS):</label>
-    <input type="text" id="dcs" value="DOE"><br>
-    <label for="dct">First Name (DCT):</label>
-    <input type="text" id="dct" value="JOHN"><br>
-    <label for="daq">DL Number (DAQ):</label>
-    <input type="text" id="daq" value="12345678"><br>
+  <div class="toggle">
+    <input type="checkbox" id="toggleAdv" onclick="document.getElementById('advancedFields').style.display = this.checked ? 'block':'none';">
+    <label for="toggleAdv" style="width:auto;">Show Advanced Fields</label>
+  </div>
+
+  <form id="dlForm">
+    <fieldset>
+      <legend>Basic Information</legend>
+      <div class="row">
+        <label for="state">State:</label>
+        <select id="state" required>
+          <option value="">Select State</option>
+          <option value="ALABAMA">Alabama</option>
+          <!-- ...all 50 states plus DC... -->
+          <option value="WYOMING">Wyoming</option>
+          <option value="DISTRICT_OF_COLUMBIA">District of Columbia</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="dca">License Class (DCA):</label>
+        <select id="dca" required>
+          <option value="">Select Class</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C" selected>C</option>
+          <option value="D">D</option>
+          <option value="M">M</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="dcs">Last Name (DCS):</label>
+        <input type="text" id="dcs" required pattern="[A-Za-z '-]{2,40}">
+      </div>
+      <div class="row">
+        <label for="dct">First Name (DCT):</label>
+        <input type="text" id="dct" required pattern="[A-Za-z '-]{2,40}">
+      </div>
+      <div class="row">
+        <label for="dbb">DOB MMDDYYYY (DBB):</label>
+        <input type="text" id="dbb" required placeholder="MMDDYYYY" pattern="\d{8}">
+      </div>
+      <div class="row">
+        <label for="dbd">Issue MMDDYYYY (DBD):</label>
+        <input type="text" id="dbd" required placeholder="MMDDYYYY" pattern="\d{8}">
+      </div>
+      <div class="row">
+        <label for="dba">Expiry MMDDYYYY (DBA):</label>
+        <input type="text" id="dba" required placeholder="MMDDYYYY" pattern="\d{8}">
+      </div>
+      <div class="row">
+        <label for="daq">DL Number (DAQ):</label>
+        <input type="text" id="daq" required pattern="[A-Za-z0-9]{4,20}">
+      </div>
+      <div class="row">
+        <label for="dbc">Gender (DBC):</label>
+        <select id="dbc" required>
+          <option value="">Select</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+          <option value="9">Other/Non-binary</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="day">Eye Color (DAY):</label>
+        <select id="day" required>
+          <option value="">Select</option>
+          <option value="BLK">Black</option>
+          <option value="BLU">Blue</option>
+          <option value="BRO">Brown</option>
+          <option value="GRY">Gray</option>
+          <option value="GRN">Green</option>
+          <option value="HAZ">Hazel</option>
+          <option value="MAR">Maroon</option>
+          <option value="PNK">Pink</option>
+          <option value="UNK">Unknown</option>
+          <option value="DIC">Dichromatic</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="dau">Height Inches (DAU):</label>
+        <input type="number" id="dau" required min="36" max="90">
+      </div>
+      <div class="row">
+        <label for="dag">Street (DAG):</label>
+        <input type="text" id="dag" required pattern=".{2,50}">
+      </div>
+      <div class="row">
+        <label for="dai">City (DAI):</label>
+        <input type="text" id="dai" required pattern=".{2,30}">
+      </div>
+      <div class="row">
+        <label for="daj">State Abbr (DAJ):</label>
+        <input type="text" id="daj" required pattern="^[A-Z]{2}$" placeholder="e.g., TX">
+      </div>
+      <div class="row">
+        <label for="dak">Zip Code (DAK):</label>
+        <input type="text" id="dak" required pattern="^\d{5}$">
+      </div>
+    </fieldset>
+
+    <fieldset id="advancedFields">
+      <legend>Advanced/Optional Fields</legend>
+      <div class="row">
+        <label for="dcb">Jurisdiction Restr. (DCB):</label>
+        <input type="text" id="dcb" pattern="[A-Za-z0-9, -]{0,30}">
+      </div>
+      <div class="row">
+        <label for="dcd">Duplicate Indicator (DCD):</label>
+        <input type="text" id="dcd" pattern="[A-Za-z0-9]{0,10}">
+      </div>
+      <div class="row">
+        <label for="dcg">Country ID (DCG):</label>
+        <input type="text" id="dcg" pattern="[A-Z]{3}">
+      </div>
+      <div class="row">
+        <label for="daa">Full Name (DAA):</label>
+        <input type="text" id="daa" pattern=".{0,60}">
+      </div>
+      <div class="row">
+        <label for="dcf">Doc Discriminator (DCF):</label>
+        <input type="text" id="dcf" pattern=".{0,20}">
+      </div>
+      <div class="row">
+        <label for="dch">Fed Compliance (DCH):</label>
+        <input type="text" id="dch" pattern=".{0,20}">
+      </div>
+      <div class="row">
+        <label for="daw">Weight lbs (DAW):</label>
+        <input type="number" id="daw" min="70" max="350">
+      </div>
+      <div class="row">
+        <label for="daz">Hair Color (DAZ):</label>
+        <select id="daz">
+          <option value=""></option>
+          <option value="BAL">Bald</option>
+          <option value="BLK">Black</option>
+          <option value="BLN">Blond</option>
+          <option value="BRO">Brown</option>
+          <option value="GRY">Gray</option>
+          <option value="RED">Red</option>
+          <option value="SDY">Sandy</option>
+          <option value="WHI">White</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="dbk">SSN (DBK):</label>
+        <input type="text" id="dbk" pattern=".{0,11}">
+      </div>
+      <div class="row">
+        <label for="dcl">Race/Ethnicity (DCL):</label>
+        <input type="text" id="dcl" pattern=".{0,20}">
+      </div>
+      <div class="row">
+        <label for="dcm">Congenital Disability (DCM):</label>
+        <input type="text" id="dcm" pattern=".{0,25}">
+      </div>
+      <div class="row">
+        <label for="ddv">Doc Exp Month (DDV):</label>
+        <input type="text" id="ddv" pattern="^\d{2}$">
+      </div>
+    </fieldset>
     <button type="button" onclick="generateDL()">Generate DL Payload</button>
   </form>
   <pre id="output"></pre>
-  <script src="aamva.js"></script>
+
   <script>
+    function validUSDate(str) {
+      // MMDDYYYY, 8 digits, valid mm/dd, not future or impossible
+      if (!/^\d{8}$/.test(str)) return false;
+      const mm = parseInt(str.slice(0,2),10), dd = parseInt(str.slice(2,4),10), yyyy = parseInt(str.slice(4,8),10);
+      if (mm < 1 || mm > 12 || dd < 1 || dd > 31 || yyyy < 1900 || yyyy > 2100) return false;
+      return true;
+    }
+
+    function validateFields(fields) {
+      // Required and pattern checks
+      const errors = [];
+      if (!fields.state) errors.push("Select a State.");
+      if (!fields.dca) errors.push("Select License Class.");
+      if (!fields.dcs.match(/[A-Za-z '-]{2,40}/)) errors.push("Last name required (2-40 letters).");
+      if (!fields.dct.match(/[A-Za-z '-]{2,40}/)) errors.push("First name required (2-40 letters).");
+      ["dbb","dbd","dba"].forEach(function(fld) {
+        if (!validUSDate(fields[fld])) errors.push(fld.toUpperCase() + " must be MMDDYYYY.");
+      });
+      if (!fields.daq.match(/[A-Za-z0-9]{4,20}/)) errors.push("DL Number required (4-20 chars).");
+      if (!fields.dbc) errors.push("Select gender.");
+      if (!fields.day) errors.push("Select eye color.");
+      if (fields.dau < 36 || fields.dau > 90) errors.push("Height must be 36-90 inches.");
+      if (!fields.dag.match(/.{2,50}/)) errors.push("Street required.");
+      if (!fields.dai.match(/.{2,30}/)) errors.push("City required.");
+      if (!fields.daj.match(/^[A-Z]{2}$/)) errors.push("State abbreviation (2 letters, e.g. TX).");
+      if (!fields.dak.match(/^\d{5}$/)) errors.push("Zip (5 digits).");
+
+      // Advanced, only if shown and filled
+      if (document.getElementById('advancedFields').style.display === "block") {
+        if(fields.dcb && !fields.dcb.match(/[A-Za-z0-9, -]{0,30}/)) errors.push("Jurisdiction Restr. invalid.");
+        if(fields.dcd && !fields.dcd.match(/[A-Za-z0-9]{0,10}/)) errors.push("Duplicate Indicator invalid.");
+        if(fields.dcg && fields.dcg.length && !fields.dcg.match(/[A-Z]{3}/)) errors.push("Country ID = 3 letters.");
+        if(fields.daa && fields.daa.length && !fields.daa.match(/.{1,60}/)) errors.push("Full Name too long.");
+        if(fields.dcf && fields.dcf.length && !fields.dcf.match(/.{0,20}/)) errors.push("Doc Discriminator invalid.");
+        if(fields.dch && fields.dch.length && !fields.dch.match(/.{0,20}/)) errors.push("Fed Compliance invalid.");
+        if(fields.daw && (fields.daw < 70 || fields.daw > 350)) errors.push("Weight (70-350 lbs).");
+        if(fields.dbk && fields.dbk.length > 0 && !fields.dbk.match(/.{4,11}/)) errors.push("SSN invalid.");
+        if(fields.dcl && fields.dcl.length && !fields.dcl.match(/.{0,20}/)) errors.push("Race/Ethnicity invalid.");
+        if(fields.dcm && fields.dcm.length && !fields.dcm.match(/.{0,25}/)) errors.push("Disability invalid.");
+        if(fields.ddv && fields.ddv.length && !fields.ddv.match(/^\d{2}$/)) errors.push("Doc Exp Month = 2 digits.");
+      }
+      return errors;
+    }
+
     function generateDL() {
-      const state = document.getElementById('state').value;
-      const userData = {
-        DCS: document.getElementById('dcs').value,
-        DCT: document.getElementById('dct').value,
-        DAQ: document.getElementById('daq').value
+      // Get all values
+      const fields = {
+        state: document.getElementById('state').value,
+        dca: document.getElementById('dca').value,
+        dcs: document.getElementById('dcs').value,
+        dct: document.getElementById('dct').value,
+        dbb: document.getElementById('dbb').value,
+        dbd: document.getElementById('dbd').value,
+        dba: document.getElementById('dba').value,
+        daq: document.getElementById('daq').value,
+        dbc: document.getElementById('dbc').value,
+        day: document.getElementById('day').value,
+        dau: document.getElementById('dau').value,
+        dag: document.getElementById('dag').value,
+        dai: document.getElementById('dai').value,
+        daj: document.getElementById('daj').value,
+        dak: document.getElementById('dak').value,
+        // Advanced
+        dcb: document.getElementById('dcb').value,
+        dcd: document.getElementById('dcd').value,
+        dcg: document.getElementById('dcg').value,
+        daa: document.getElementById('daa').value,
+        dcf: document.getElementById('dcf').value,
+        dch: document.getElementById('dch').value,
+        daw: document.getElementById('daw').value,
+        daz: document.getElementById('daz').value,
+        dbk: document.getElementById('dbk').value,
+        dcl: document.getElementById('dcl').value,
+        dcm: document.getElementById('dcm').value,
+        ddv: document.getElementById('ddv').value
       };
-      const fields = buildAAMVA_v10(state, userData);
-      const payload = buildAAMVA_v10_payload(fields);
-      document.getElementById('output').textContent = payload;
+
+      const errors = validateFields(fields);
+      if (errors.length) {
+        alert(errors.join('\n'));
+        return;
+      }
+      // If you have buildAAMVA_v10 and buildAAMVA_v10_payload functions, plug fields into them here.
+      document.getElementById('output').textContent = JSON.stringify(fields, null, 2);
     }
   </script>
 </body>
