@@ -2,286 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AAMVA v10 Generator - Validated Full Form</title>
+  <title>Modern DL Generator - Demo</title>
   <style>
-    body { font-family: sans-serif; background:#f6f8fa; padding:2em; }
-    label { display:inline-block; width:170px; margin-top:.4em; }
-    fieldset { border:1px solid #ccc; padding:1em; margin-bottom:1.5em; }
-    legend { font-size:1em; font-weight:bold;}
-    .row {margin-bottom:0.5em;}
-    #advancedFields { display:none; }
-    .toggle { margin-bottom:1.3em; }
-    input:invalid, select:invalid { border: 1px solid red; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #272c35; color: #fff; margin: 0; padding: 30px;}
+    h1 { text-align:center; margin-bottom:12px;}
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom:16px;}
+    .row { display: flex; gap:8px; align-items:center;}
+    .btn, .pill { border-radius:14px; padding:4px 10px; margin-right:4px;}
+    .pill { background: #555; color: #fff; border: none; cursor:pointer;}
+    .pill.active { background:#1ad6ff;}
+    .toggleBtn { background: #4040f8; color: #fff; border:none;}
+    select, input[type=text], input[type=number] {
+      background: #181a20;
+      color: #fff;
+      border: 2px solid #364050;
+      border-radius: 8px;
+      font-size: 1em;
+      padding: 4px;
+      width: 100%;
+    }
+    label { font-size:0.97em;}
+    .section { padding: 10px 8px 9px 8px; margin-bottom:0;}
+    .badge { padding:2px 6px; border-radius:8px; background:#1ad6ff; color:#181a20;}
+    .badge.off {background:#666;}
+    .highlight { background:#3a3e4d; padding:6px 10px; border-radius:10px; margin-bottom:7px;}
+    .warning {color:red; font-weight:bold;}
   </style>
 </head>
 <body>
-  <h1>AAMVA v10 Generator Demo</h1>
-  <div class="toggle">
-    <input type="checkbox" id="toggleAdv" onchange="document.getElementById('advancedFields').style.display = this.checked ? 'block':'none';">
-    <label for="toggleAdv" style="width:auto;">Show Advanced Fields</label>
-  </div>
-  <form id="dlForm" autocomplete="off" novalidate>
-    <fieldset>
-      <legend>Basic Information</legend>
-      <div class="row">
-        <label for="state">State:</label>
-        <select id="state" required>
-          <option value="">Select State</option>
-          <option value="ALABAMA">Alabama</option>
-          <option value="ALASKA">Alaska</option>
-          <option value="ARIZONA">Arizona</option>
-          <option value="ARKANSAS">Arkansas</option>
-          <option value="CALIFORNIA">California</option>
-          <option value="COLORADO">Colorado</option>
-          <option value="CONNECTICUT">Connecticut</option>
-          <option value="DELAWARE">Delaware</option>
-          <option value="FLORIDA">Florida</option>
-          <option value="GEORGIA">Georgia</option>
-          <option value="HAWAII">Hawaii</option>
-          <option value="IDAHO">Idaho</option>
-          <option value="ILLINOIS">Illinois</option>
-          <option value="INDIANA">Indiana</option>
-          <option value="IOWA">Iowa</option>
-          <option value="KANSAS">Kansas</option>
-          <option value="KENTUCKY">Kentucky</option>
-          <option value="LOUISIANA">Louisiana</option>
-          <option value="MAINE">Maine</option>
-          <option value="MARYLAND">Maryland</option>
-          <option value="MASSACHUSETTS">Massachusetts</option>
-          <option value="MICHIGAN">Michigan</option>
-          <option value="MINNESOTA">Minnesota</option>
-          <option value="MISSISSIPPI">Mississippi</option>
-          <option value="MISSOURI">Missouri</option>
-          <option value="MONTANA">Montana</option>
-          <option value="NEBRASKA">Nebraska</option>
-          <option value="NEVADA">Nevada</option>
-          <option value="NEW_HAMPSHIRE">New Hampshire</option>
-          <option value="NEW_JERSEY">New Jersey</option>
-          <option value="NEW_MEXICO">New Mexico</option>
-          <option value="NEW_YORK">New York</option>
-          <option value="NORTH_CAROLINA">North Carolina</option>
-          <option value="NORTH_DAKOTA">North Dakota</option>
-          <option value="OHIO">Ohio</option>
-          <option value="OKLAHOMA">Oklahoma</option>
-          <option value="OREGON">Oregon</option>
-          <option value="PENNSYLVANIA">Pennsylvania</option>
-          <option value="RHODE_ISLAND">Rhode Island</option>
-          <option value="SOUTH_CAROLINA">South Carolina</option>
-          <option value="SOUTH_DAKOTA">South Dakota</option>
-          <option value="TENNESSEE">Tennessee</option>
-          <option value="TEXAS">Texas</option>
-          <option value="UTAH">Utah</option>
-          <option value="VERMONT">Vermont</option>
-          <option value="VIRGINIA">Virginia</option>
-          <option value="WASHINGTON">Washington</option>
-          <option value="WEST_VIRGINIA">West Virginia</option>
-          <option value="WISCONSIN">Wisconsin</option>
-          <option value="WYOMING">Wyoming</option>
-          <option value="DISTRICT_OF_COLUMBIA">District of Columbia</option>
+  <div class="warning">Do not use the images illegally! Our terms – link</div>
+  <h1>DL Generator</h1>
+  <form id="dlForm" autocomplete="off">
+    <div class="grid">
+      <div class="section">
+        <label>Gender:</label>
+        <div class="row">
+          <span class="pill active">Male</span>
+          <span class="pill">Female</span>
+        </div>
+        <label>Country:</label>
+        <div class="row">
+          <span class="pill active">USA</span>
+          <span class="pill">CANADA</span>
+        </div>
+        <label>SSN:</label>
+        <div class="row">
+          <span class="pill">NO</span>
+          <span class="pill active">METADATA</span>
+        </div>
+      </div>
+      <div class="section">
+        <label>First Name:</label><div class="row">
+          <input type="text" id="firstName" value="John">
+          <button type="button" class="pill">RANDOM</button>
+        </div>
+        <label>Middle Name:</label>
+        <input type="text" id="middleName">
+        <label>Last Name:</label>
+        <input type="text" id="lastName" value="Wick">
+      </div>
+      <div class="section">
+        <label>State:</label>
+        <select id="state">
+          <option>Texas</option>
+          <!-- ...All states... -->
         </select>
+        <label>City:</label><div class="row">
+          <input type="text" id="city">
+          <button type="button" class="pill">RANDOM</button>
+        </div>
+        <label>Street:</label>
+        <input type="text" id="street">
+        <label>ZIP-Code:</label>
+        <input type="text" id="zip" value="00000000">
       </div>
-      <div class="row">
-        <label for="dca">License Class (DCA):</label>
-        <select id="dca" required>
-          <option value="">Select Class</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="M">M</option>
-        </select>
+      <div class="section">
+        <label>Revisions:</label>
+        <input type="text" id="revisions">
+        <label>Class:</label>
+        <select id="class"><option>D-Regular Operators Lic</option></select>
+        <label>License Type:</label>
+        <div class="row">
+          <span class="pill active">DL</span>
+          <span class="pill">CDL</span>
+        </div>
       </div>
-      <div class="row">
-        <label for="dcs">Last Name (DCS):</label>
-        <input type="text" id="dcs" required pattern="[A-Za-z '-]{2,40}">
+    </div>
+    <div class="grid">
+      <div class="section">
+        <label>Hair Color:</label>
+        <select id="hair"><option>Black</option></select>
+        <label>Eye Color:</label>
+        <select id="eye"><option>Black</option></select>
+        <label>Race Code:</label>
+        <select id="race"><option>Alaskan or American Indian</option></select>
       </div>
-      <div class="row">
-        <label for="dct">First Name (DCT):</label>
-        <input type="text" id="dct" required pattern="[A-Za-z '-]{2,40}">
+      <div class="section">
+        <label>Height (ft/in):</label>
+        <div class="row">
+          <input type="number" id="heightFt" style="width:60px" min="1" max="8" value="5"> ft
+          <input type="number" id="heightIn" style="width:60px" min="0" max="11" value="10"> in
+        </div>
+        <label>Weight (lbs):</label>
+        <input type="number" id="weight" value="130">
+        <label>Hologram:</label>
+        <div class="row">
+          <span class="pill active">HOLOGRAM</span>
+          <span class="pill">NONE</span>
+        </div>
       </div>
-      <div class="row">
-        <label for="dbb">DOB MMDDYYYY (DBB):</label>
-        <input type="text" id="dbb" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
+      <div class="section">
+        <label>Birthday:</label>
+        <div class="row">
+          <input type="text" id="birthday" value="02031980" maxlength="8">
+          <button type="button" class="pill">RANDOM</button>
+        </div>
+        <label>Issue date:</label>
+        <div class="row">
+          <input type="text" id="issuedate" value="01022000" maxlength="8">
+          <button type="button" class="pill">CALC</button>
+        </div>
+        <label>Expiry date:</label>
+        <div class="row">
+          <input type="text" id="expdate" value="02031999" maxlength="8">
+          <button type="button" class="pill">CALC</button>
+        </div>
+        <label>Date Format:</label>
+        <div class="row">
+          <span class="pill active">MMDDYYYY</span>
+          <span class="pill">DDMMYYYY</span>
+        </div>
       </div>
-      <div class="row">
-        <label for="dbd">Issue MMDDYYYY (DBD):</label>
-        <input type="text" id="dbd" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
+      <div class="section">
+        <label>Lic number:</label>
+        <input type="text" id="licnum" value="7847749">
+        <label>DOC. Discriminator:</label>
+        <input type="text" id="discriminator" value="NONE">
+        <label>Inv number:</label>
+        <input type="text" id="invnum" value="000000000001013154945">
       </div>
-      <div class="row">
-        <label for="dba">Expiry MMDDYYYY (DBA):</label>
-        <input type="text" id="dba" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
+    </div>
+    <div class="grid">
+      <div class="section">
+        <label>Audit information:</label>
+        <input type="text" id="audit">
+        <label>Restriction:</label>
+        <input type="text" id="restriction">
       </div>
-      <div class="row">
-        <label for="daq">DL Number (DAQ):</label>
-        <input type="text" id="daq" required pattern="[A-Za-z0-9]{4,20}">
+      <div class="section">
+        <label>Endorsement:</label>
+        <input type="text" id="endorsement">
       </div>
-      <div class="row">
-        <label for="dbc">Gender (DBC):</label>
-        <select id="dbc" required>
-          <option value="">Select</option>
-          <option value="1">Male</option>
-          <option value="2">Female</option>
-          <option value="9">Other/Non-binary</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="day">Eye Color (DAY):</label>
-        <select id="day" required>
-          <option value="">Select</option>
-          <option value="BLK">Black</option>
-          <option value="BLU">Blue</option>
-          <option value="BRO">Brown</option>
-          <option value="GRY">Gray</option>
-          <option value="GRN">Green</option>
-          <option value="HAZ">Hazel</option>
-          <option value="MAR">Maroon</option>
-          <option value="PNK">Pink</option>
-          <option value="UNK">Unknown</option>
-          <option value="DIC">Dichromatic</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="dau">Height Inches (DAU):</label>
-        <input type="number" id="dau" required min="36" max="90">
-      </div>
-      <div class="row">
-        <label for="dag">Street (DAG):</label>
-        <input type="text" id="dag" required pattern=".{2,50}">
-      </div>
-      <div class="row">
-        <label for="dai">City (DAI):</label>
-        <input type="text" id="dai" required pattern=".{2,30}">
-      </div>
-      <div class="row">
-        <label for="daj">State Abbr (DAJ):</label>
-        <input type="text" id="daj" required pattern="^[A-Z]{2}$" placeholder="e.g., TX">
-      </div>
-      <div class="row">
-        <label for="dak">Zip Code (DAK):</label>
-        <input type="text" id="dak" required pattern="^\d{5}$">
-      </div>
-    </fieldset>
-    <fieldset id="advancedFields">
-      <legend>Advanced/Optional Fields</legend>
-      <!-- Repeat structure for as many advanced fields as desired, updating IDs/names/patterns as needed. -->
-      <div class="row">
-        <label for="dcb">Jurisdiction Restr. (DCB):</label>
-        <input type="text" id="dcb" pattern="[A-Za-z0-9, -]{0,30}">
-      </div>
-      <div class="row">
-        <label for="dcd">Duplicate Indicator (DCD):</label>
-        <input type="text" id="dcd" pattern="[A-Za-z0-9]{0,10}">
-      </div>
-      <div class="row">
-        <label for="dcg">Country ID (DCG):</label>
-        <input type="text" id="dcg" pattern="[A-Z]{3}">
-      </div>
-      <div class="row">
-        <label for="daa">Full Name (DAA):</label>
-        <input type="text" id="daa" pattern=".{0,60}">
-      </div>
-      <div class="row">
-        <label for="dcf">Doc Discriminator (DCF):</label>
-        <input type="text" id="dcf" pattern=".{0,20}">
-      </div>
-      <div class="row">
-        <label for="dch">Fed Compliance (DCH):</label>
-        <input type="text" id="dch" pattern=".{0,20}">
-      </div>
-      <div class="row">
-        <label for="daw">Weight lbs (DAW):</label>
-        <input type="number" id="daw" min="70" max="350">
-      </div>
-      <div class="row">
-        <label for="daz">Hair Color (DAZ):</label>
-        <select id="daz">
-          <option value=""></option>
-          <option value="BAL">Bald</option>
-          <option value="BLK">Black</option>
-          <option value="BLN">Blond</option>
-          <option value="BRO">Brown</option>
-          <option value="GRY">Gray</option>
-          <option value="RED">Red</option>
-          <option value="SDY">Sandy</option>
-          <option value="WHI">White</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="dbk">SSN (DBK):</label>
-        <input type="text" id="dbk" pattern=".{0,11}">
-      </div>
-      <div class="row">
-        <label for="dcl">Race/Ethnicity (DCL):</label>
-        <input type="text" id="dcl" pattern=".{0,20}">
-      </div>
-      <div class="row">
-        <label for="dcm">Congenital Disability (DCM):</label>
-        <input type="text" id="dcm" pattern=".{0,25}">
-      </div>
-      <div class="row">
-        <label for="ddv">Doc Exp Month (DDV):</label>
-        <input type="text" id="ddv" pattern="^\d{2}$">
-      </div>
-    </fieldset>
-    <button type="button" onclick="generateDL()">Generate DL Payload</button>
+    </div>
+    <button type="submit" style="margin-top:16px;background:#1ad6ff;color:#222;font-weight:bold;border:none;border-radius:8px;">Generate DL</button>
   </form>
-  <pre id="output"></pre>
-  <script>
-    // MMDDYYYY format strict validation
-    function validUSDate(str) {
-      if (!/^\d{8}$/.test(str)) return false;
-      const mm = parseInt(str.slice(0,2),10), dd = parseInt(str.slice(2,4),10), yyyy = parseInt(str.slice(4,8),10);
-      if (mm < 1 || mm > 12 || dd < 1 || dd > 31 || yyyy < 1900 || yyyy > 2100) return false;
-      return true;
-    }
-    function validateAll() {
-      let errors = [];
-      // required values from main form
-      const f = id => document.getElementById(id);
-      if(!f('state').value) errors.push('State required.');
-      if(!f('dcs').value.match(/[A-Za-z '-]{2,40}/)) errors.push('Last Name invalid.');
-      if(!f('dct').value.match(/[A-Za-z '-]{2,40}/)) errors.push('First Name invalid.');
-      if(!f('daq').value.match(/[A-Za-z0-9]{4,20}/)) errors.push('DL Number invalid.');
-      if(!f('dca').value) errors.push('License Class required.');
-      if(!f('dbc').value) errors.push('Gender required.');
-      if(!f('day').value) errors.push('Eye color required.');
-      if(!f('dag').value.match(/.{2,50}/)) errors.push('Street required.');
-      if(!f('dai').value.match(/.{2,30}/)) errors.push('City required.');
-      if(!f('daj').value.match(/^[A-Z]{2}$/)) errors.push('State abbr required.');
-      if(!f('dak').value.match(/^\d{5}$/)) errors.push('Zip required.');
-      if(f('dau').value<36||f('dau').value>90) errors.push('Height 36-90 inches.');
-      // dates
-      ['dbb','dbd','dba'].forEach(function(x){
-        if(!validUSDate(f(x).value)) errors.push(x.toUpperCase()+' must be MMDDYYYY');
-      });
-      // advanced only if displayed
-      if(document.getElementById('advancedFields').style.display==='block'){
-        if(f('dcb').value && !f('dcb').value.match(/[A-Za-z0-9, -]{0,30}/)) errors.push('Jurisdiction Restr. invalid.');
-        if(f('dcd').value && !f('dcd').value.match(/[A-Za-z0-9]{0,10}/)) errors.push('Duplicate Indicator invalid.');
-        if(f('dcg').value && !f('dcg').value.match(/^[A-Z]{3}$/)) errors.push('Country ID = 3 letters.');
-        if(f('daa').value && !f('daa').value.match(/.{1,60}/)) errors.push('Full Name too long.');
-        if(f('dcf').value && !f('dcf').value.match(/.{0,20}/)) errors.push('Doc Discriminator invalid.');
-        if(f('dch').value && !f('dch').value.match(/.{0,20}/)) errors.push('Fed Compliance invalid.');
-        if(f('daw').value && (f('daw').value<70 || f('daw').value>350)) errors.push('Weight (70-350 lbs).');
-        if(f('dbk').value && !f('dbk').value.match(/.{4,11}/)) errors.push('SSN invalid.');
-        if(f('dcl').value && !f('dcl').value.match(/.{0,20}/)) errors.push('Race/Ethnicity invalid.');
-        if(f('dcm').value && !f('dcm').value.match(/.{0,25}/)) errors.push('Disability invalid.');
-        if(f('ddv').value && !f('ddv').value.match(/^\d{2}$/)) errors.push('Doc Exp Month = 2 digits.');
-      }
-      return errors;
-    }
-    function generateDL() {
-      const errors = validateAll();
-      if (errors.length) {
-        alert(errors.join('\n'));
-        return;
-      }
-      // Replace with your AAMVA encoder or builder function here
-      // This is just demo serialization:
-      const out={};
-      document.querySelectorAll('input,select').forEach(x=>out[x.id]=x.value);
-      document.getElementById('output').textContent=JSON.stringify(out,null,2);
-    }
-  </script>
 </body>
 </html>
