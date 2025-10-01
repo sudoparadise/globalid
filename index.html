@@ -1,28 +1,36 @@
-<script src="aamva.js"></script>
-
-const AAMVA_V10_FIELDS = [
-  "DCA", "DCB", "DCD", "DBA", "DCS", "DCT", "DBD", "DBB", "DBC", "DAY",
-  "DAU", "DAG", "DAI", "DAJ", "DAK", "DAQ", "DCF", "DCG", "DCH",
-  "DAA", "DAW", "DAZ"
-];
-const STATE_OVERRIDES = {
-  "TEXAS": { DCA: "C", DCG: "USA" },
-  "CALIFORNIA": { DCA: "C", DCG: "USA" },
-};
-function buildAAMVA_v10(state, userData) {
-  let data = {};
-  AAMVA_V10_FIELDS.forEach(code => {
-    data[code] = (STATE_OVERRIDES[state] && STATE_OVERRIDES[state][code]) || userData[code] || '';
-  });
-  return data;
-}
-function buildAAMVA_v10_payload(fields) {
-  let payload = "";
-  payload += "@" + "\n";
-  payload += "ANSI 636026080102DL00410270Z\n";
-  Object.keys(fields).forEach(key => {
-    payload += key + fields[key] + "\n";
-  });
-  return payload;
-}
-<script src="aamva.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GlobalID Demo</title>
+</head>
+<body>
+  <h1>AAMVA v10 Generator Demo</h1>
+  <form id="dlForm">
+    <label for="state">State:</label>
+    <input type="text" id="state" value="TEXAS"><br>
+    <label for="dcs">Last Name (DCS):</label>
+    <input type="text" id="dcs" value="DOE"><br>
+    <label for="dct">First Name (DCT):</label>
+    <input type="text" id="dct" value="JOHN"><br>
+    <label for="daq">DL Number (DAQ):</label>
+    <input type="text" id="daq" value="12345678"><br>
+    <button type="button" onclick="generateDL()">Generate DL Payload</button>
+  </form>
+  <pre id="output"></pre>
+  <script src="aamva.js"></script>
+  <script>
+    function generateDL() {
+      const state = document.getElementById('state').value;
+      const userData = {
+        DCS: document.getElementById('dcs').value,
+        DCT: document.getElementById('dct').value,
+        DAQ: document.getElementById('daq').value
+      };
+      const fields = buildAAMVA_v10(state, userData);
+      const payload = buildAAMVA_v10_payload(fields);
+      document.getElementById('output').textContent = payload;
+    }
+  </script>
+</body>
+</html>
