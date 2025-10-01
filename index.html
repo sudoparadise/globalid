@@ -16,13 +16,11 @@
 </head>
 <body>
   <h1>AAMVA v10 Generator Demo</h1>
-
   <div class="toggle">
-    <input type="checkbox" id="toggleAdv" onclick="document.getElementById('advancedFields').style.display = this.checked ? 'block':'none';">
+    <input type="checkbox" id="toggleAdv" onchange="document.getElementById('advancedFields').style.display = this.checked ? 'block':'none';">
     <label for="toggleAdv" style="width:auto;">Show Advanced Fields</label>
   </div>
-
-  <form id="dlForm">
+  <form id="dlForm" autocomplete="off" novalidate>
     <fieldset>
       <legend>Basic Information</legend>
       <div class="row">
@@ -30,7 +28,54 @@
         <select id="state" required>
           <option value="">Select State</option>
           <option value="ALABAMA">Alabama</option>
-          <!-- ...all 50 states plus DC... -->
+          <option value="ALASKA">Alaska</option>
+          <option value="ARIZONA">Arizona</option>
+          <option value="ARKANSAS">Arkansas</option>
+          <option value="CALIFORNIA">California</option>
+          <option value="COLORADO">Colorado</option>
+          <option value="CONNECTICUT">Connecticut</option>
+          <option value="DELAWARE">Delaware</option>
+          <option value="FLORIDA">Florida</option>
+          <option value="GEORGIA">Georgia</option>
+          <option value="HAWAII">Hawaii</option>
+          <option value="IDAHO">Idaho</option>
+          <option value="ILLINOIS">Illinois</option>
+          <option value="INDIANA">Indiana</option>
+          <option value="IOWA">Iowa</option>
+          <option value="KANSAS">Kansas</option>
+          <option value="KENTUCKY">Kentucky</option>
+          <option value="LOUISIANA">Louisiana</option>
+          <option value="MAINE">Maine</option>
+          <option value="MARYLAND">Maryland</option>
+          <option value="MASSACHUSETTS">Massachusetts</option>
+          <option value="MICHIGAN">Michigan</option>
+          <option value="MINNESOTA">Minnesota</option>
+          <option value="MISSISSIPPI">Mississippi</option>
+          <option value="MISSOURI">Missouri</option>
+          <option value="MONTANA">Montana</option>
+          <option value="NEBRASKA">Nebraska</option>
+          <option value="NEVADA">Nevada</option>
+          <option value="NEW_HAMPSHIRE">New Hampshire</option>
+          <option value="NEW_JERSEY">New Jersey</option>
+          <option value="NEW_MEXICO">New Mexico</option>
+          <option value="NEW_YORK">New York</option>
+          <option value="NORTH_CAROLINA">North Carolina</option>
+          <option value="NORTH_DAKOTA">North Dakota</option>
+          <option value="OHIO">Ohio</option>
+          <option value="OKLAHOMA">Oklahoma</option>
+          <option value="OREGON">Oregon</option>
+          <option value="PENNSYLVANIA">Pennsylvania</option>
+          <option value="RHODE_ISLAND">Rhode Island</option>
+          <option value="SOUTH_CAROLINA">South Carolina</option>
+          <option value="SOUTH_DAKOTA">South Dakota</option>
+          <option value="TENNESSEE">Tennessee</option>
+          <option value="TEXAS">Texas</option>
+          <option value="UTAH">Utah</option>
+          <option value="VERMONT">Vermont</option>
+          <option value="VIRGINIA">Virginia</option>
+          <option value="WASHINGTON">Washington</option>
+          <option value="WEST_VIRGINIA">West Virginia</option>
+          <option value="WISCONSIN">Wisconsin</option>
           <option value="WYOMING">Wyoming</option>
           <option value="DISTRICT_OF_COLUMBIA">District of Columbia</option>
         </select>
@@ -41,7 +86,7 @@
           <option value="">Select Class</option>
           <option value="A">A</option>
           <option value="B">B</option>
-          <option value="C" selected>C</option>
+          <option value="C">C</option>
           <option value="D">D</option>
           <option value="M">M</option>
         </select>
@@ -56,15 +101,15 @@
       </div>
       <div class="row">
         <label for="dbb">DOB MMDDYYYY (DBB):</label>
-        <input type="text" id="dbb" required placeholder="MMDDYYYY" pattern="\d{8}">
+        <input type="text" id="dbb" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
       </div>
       <div class="row">
         <label for="dbd">Issue MMDDYYYY (DBD):</label>
-        <input type="text" id="dbd" required placeholder="MMDDYYYY" pattern="\d{8}">
+        <input type="text" id="dbd" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
       </div>
       <div class="row">
         <label for="dba">Expiry MMDDYYYY (DBA):</label>
-        <input type="text" id="dba" required placeholder="MMDDYYYY" pattern="\d{8}">
+        <input type="text" id="dba" required placeholder="MMDDYYYY" maxlength="8" pattern="\d{8}">
       </div>
       <div class="row">
         <label for="daq">DL Number (DAQ):</label>
@@ -116,9 +161,9 @@
         <input type="text" id="dak" required pattern="^\d{5}$">
       </div>
     </fieldset>
-
     <fieldset id="advancedFields">
       <legend>Advanced/Optional Fields</legend>
+      <!-- Repeat structure for as many advanced fields as desired, updating IDs/names/patterns as needed. -->
       <div class="row">
         <label for="dcb">Jurisdiction Restr. (DCB):</label>
         <input type="text" id="dcb" pattern="[A-Za-z0-9, -]{0,30}">
@@ -181,92 +226,61 @@
     <button type="button" onclick="generateDL()">Generate DL Payload</button>
   </form>
   <pre id="output"></pre>
-
   <script>
+    // MMDDYYYY format strict validation
     function validUSDate(str) {
-      // MMDDYYYY, 8 digits, valid mm/dd, not future or impossible
       if (!/^\d{8}$/.test(str)) return false;
       const mm = parseInt(str.slice(0,2),10), dd = parseInt(str.slice(2,4),10), yyyy = parseInt(str.slice(4,8),10);
       if (mm < 1 || mm > 12 || dd < 1 || dd > 31 || yyyy < 1900 || yyyy > 2100) return false;
       return true;
     }
-
-    function validateFields(fields) {
-      // Required and pattern checks
-      const errors = [];
-      if (!fields.state) errors.push("Select a State.");
-      if (!fields.dca) errors.push("Select License Class.");
-      if (!fields.dcs.match(/[A-Za-z '-]{2,40}/)) errors.push("Last name required (2-40 letters).");
-      if (!fields.dct.match(/[A-Za-z '-]{2,40}/)) errors.push("First name required (2-40 letters).");
-      ["dbb","dbd","dba"].forEach(function(fld) {
-        if (!validUSDate(fields[fld])) errors.push(fld.toUpperCase() + " must be MMDDYYYY.");
+    function validateAll() {
+      let errors = [];
+      // required values from main form
+      const f = id => document.getElementById(id);
+      if(!f('state').value) errors.push('State required.');
+      if(!f('dcs').value.match(/[A-Za-z '-]{2,40}/)) errors.push('Last Name invalid.');
+      if(!f('dct').value.match(/[A-Za-z '-]{2,40}/)) errors.push('First Name invalid.');
+      if(!f('daq').value.match(/[A-Za-z0-9]{4,20}/)) errors.push('DL Number invalid.');
+      if(!f('dca').value) errors.push('License Class required.');
+      if(!f('dbc').value) errors.push('Gender required.');
+      if(!f('day').value) errors.push('Eye color required.');
+      if(!f('dag').value.match(/.{2,50}/)) errors.push('Street required.');
+      if(!f('dai').value.match(/.{2,30}/)) errors.push('City required.');
+      if(!f('daj').value.match(/^[A-Z]{2}$/)) errors.push('State abbr required.');
+      if(!f('dak').value.match(/^\d{5}$/)) errors.push('Zip required.');
+      if(f('dau').value<36||f('dau').value>90) errors.push('Height 36-90 inches.');
+      // dates
+      ['dbb','dbd','dba'].forEach(function(x){
+        if(!validUSDate(f(x).value)) errors.push(x.toUpperCase()+' must be MMDDYYYY');
       });
-      if (!fields.daq.match(/[A-Za-z0-9]{4,20}/)) errors.push("DL Number required (4-20 chars).");
-      if (!fields.dbc) errors.push("Select gender.");
-      if (!fields.day) errors.push("Select eye color.");
-      if (fields.dau < 36 || fields.dau > 90) errors.push("Height must be 36-90 inches.");
-      if (!fields.dag.match(/.{2,50}/)) errors.push("Street required.");
-      if (!fields.dai.match(/.{2,30}/)) errors.push("City required.");
-      if (!fields.daj.match(/^[A-Z]{2}$/)) errors.push("State abbreviation (2 letters, e.g. TX).");
-      if (!fields.dak.match(/^\d{5}$/)) errors.push("Zip (5 digits).");
-
-      // Advanced, only if shown and filled
-      if (document.getElementById('advancedFields').style.display === "block") {
-        if(fields.dcb && !fields.dcb.match(/[A-Za-z0-9, -]{0,30}/)) errors.push("Jurisdiction Restr. invalid.");
-        if(fields.dcd && !fields.dcd.match(/[A-Za-z0-9]{0,10}/)) errors.push("Duplicate Indicator invalid.");
-        if(fields.dcg && fields.dcg.length && !fields.dcg.match(/[A-Z]{3}/)) errors.push("Country ID = 3 letters.");
-        if(fields.daa && fields.daa.length && !fields.daa.match(/.{1,60}/)) errors.push("Full Name too long.");
-        if(fields.dcf && fields.dcf.length && !fields.dcf.match(/.{0,20}/)) errors.push("Doc Discriminator invalid.");
-        if(fields.dch && fields.dch.length && !fields.dch.match(/.{0,20}/)) errors.push("Fed Compliance invalid.");
-        if(fields.daw && (fields.daw < 70 || fields.daw > 350)) errors.push("Weight (70-350 lbs).");
-        if(fields.dbk && fields.dbk.length > 0 && !fields.dbk.match(/.{4,11}/)) errors.push("SSN invalid.");
-        if(fields.dcl && fields.dcl.length && !fields.dcl.match(/.{0,20}/)) errors.push("Race/Ethnicity invalid.");
-        if(fields.dcm && fields.dcm.length && !fields.dcm.match(/.{0,25}/)) errors.push("Disability invalid.");
-        if(fields.ddv && fields.ddv.length && !fields.ddv.match(/^\d{2}$/)) errors.push("Doc Exp Month = 2 digits.");
+      // advanced only if displayed
+      if(document.getElementById('advancedFields').style.display==='block'){
+        if(f('dcb').value && !f('dcb').value.match(/[A-Za-z0-9, -]{0,30}/)) errors.push('Jurisdiction Restr. invalid.');
+        if(f('dcd').value && !f('dcd').value.match(/[A-Za-z0-9]{0,10}/)) errors.push('Duplicate Indicator invalid.');
+        if(f('dcg').value && !f('dcg').value.match(/^[A-Z]{3}$/)) errors.push('Country ID = 3 letters.');
+        if(f('daa').value && !f('daa').value.match(/.{1,60}/)) errors.push('Full Name too long.');
+        if(f('dcf').value && !f('dcf').value.match(/.{0,20}/)) errors.push('Doc Discriminator invalid.');
+        if(f('dch').value && !f('dch').value.match(/.{0,20}/)) errors.push('Fed Compliance invalid.');
+        if(f('daw').value && (f('daw').value<70 || f('daw').value>350)) errors.push('Weight (70-350 lbs).');
+        if(f('dbk').value && !f('dbk').value.match(/.{4,11}/)) errors.push('SSN invalid.');
+        if(f('dcl').value && !f('dcl').value.match(/.{0,20}/)) errors.push('Race/Ethnicity invalid.');
+        if(f('dcm').value && !f('dcm').value.match(/.{0,25}/)) errors.push('Disability invalid.');
+        if(f('ddv').value && !f('ddv').value.match(/^\d{2}$/)) errors.push('Doc Exp Month = 2 digits.');
       }
       return errors;
     }
-
     function generateDL() {
-      // Get all values
-      const fields = {
-        state: document.getElementById('state').value,
-        dca: document.getElementById('dca').value,
-        dcs: document.getElementById('dcs').value,
-        dct: document.getElementById('dct').value,
-        dbb: document.getElementById('dbb').value,
-        dbd: document.getElementById('dbd').value,
-        dba: document.getElementById('dba').value,
-        daq: document.getElementById('daq').value,
-        dbc: document.getElementById('dbc').value,
-        day: document.getElementById('day').value,
-        dau: document.getElementById('dau').value,
-        dag: document.getElementById('dag').value,
-        dai: document.getElementById('dai').value,
-        daj: document.getElementById('daj').value,
-        dak: document.getElementById('dak').value,
-        // Advanced
-        dcb: document.getElementById('dcb').value,
-        dcd: document.getElementById('dcd').value,
-        dcg: document.getElementById('dcg').value,
-        daa: document.getElementById('daa').value,
-        dcf: document.getElementById('dcf').value,
-        dch: document.getElementById('dch').value,
-        daw: document.getElementById('daw').value,
-        daz: document.getElementById('daz').value,
-        dbk: document.getElementById('dbk').value,
-        dcl: document.getElementById('dcl').value,
-        dcm: document.getElementById('dcm').value,
-        ddv: document.getElementById('ddv').value
-      };
-
-      const errors = validateFields(fields);
+      const errors = validateAll();
       if (errors.length) {
         alert(errors.join('\n'));
         return;
       }
-      // If you have buildAAMVA_v10 and buildAAMVA_v10_payload functions, plug fields into them here.
-      document.getElementById('output').textContent = JSON.stringify(fields, null, 2);
+      // Replace with your AAMVA encoder or builder function here
+      // This is just demo serialization:
+      const out={};
+      document.querySelectorAll('input,select').forEach(x=>out[x.id]=x.value);
+      document.getElementById('output').textContent=JSON.stringify(out,null,2);
     }
   </script>
 </body>
