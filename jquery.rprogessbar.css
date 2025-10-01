@@ -1,0 +1,33 @@
+/*----------------------------
+    rProgressbar
+----------------------------*/
+
+.progressbar {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    position: relative;
+    background-color: #f4f4f4;
+}
+
+.proggress {
+    height: 8px;
+    width: 10px;
+    background-color: #ff0;
+}
+
+.percentCount {
+    float: right;
+    margin-top: 10px;
+    clear: both;
+    font-size: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    text-shadow: 1px 1px 10px white;
+    line-height: 12px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    display: inline-block;
+}
