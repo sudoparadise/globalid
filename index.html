@@ -1,0 +1,28 @@
+<script src="aamva.js"></script>
+
+const AAMVA_V10_FIELDS = [
+  "DCA", "DCB", "DCD", "DBA", "DCS", "DCT", "DBD", "DBB", "DBC", "DAY",
+  "DAU", "DAG", "DAI", "DAJ", "DAK", "DAQ", "DCF", "DCG", "DCH",
+  "DAA", "DAW", "DAZ"
+];
+const STATE_OVERRIDES = {
+  "TEXAS": { DCA: "C", DCG: "USA" },
+  "CALIFORNIA": { DCA: "C", DCG: "USA" },
+};
+function buildAAMVA_v10(state, userData) {
+  let data = {};
+  AAMVA_V10_FIELDS.forEach(code => {
+    data[code] = (STATE_OVERRIDES[state] && STATE_OVERRIDES[state][code]) || userData[code] || '';
+  });
+  return data;
+}
+function buildAAMVA_v10_payload(fields) {
+  let payload = "";
+  payload += "@" + "\n";
+  payload += "ANSI 636026080102DL00410270Z\n";
+  Object.keys(fields).forEach(key => {
+    payload += key + fields[key] + "\n";
+  });
+  return payload;
+}
+<script src="aamva.js"></script>
